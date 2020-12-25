@@ -13,7 +13,7 @@
 
 body {
     /* background: url("https://images.pexels.com/photos/1655166/pexels-photo-1655166.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260") no-repeat center center; */
-    background-image: url(./zen.jpg);
+    background-image: url(./zen.png);
     background-size: cover;
     display: grid;
     font-family: "Inconsolata", monospace;
