@@ -21,7 +21,7 @@ body {
     min-height: 100vh;
     place-items: center;
     
-    background: rgba( 131, 255, 0, 0.50 );
+    background: rgba(0, 217, 255, 0.5);
     box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
     backdrop-filter: blur( 8.5px );
     -webkit-backdrop-filter: blur( 8.5px );
