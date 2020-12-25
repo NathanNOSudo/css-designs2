@@ -1,0 +1,140 @@
+
+        /* ******BROWSER SUPPORT NOTE****** */
+        /*  !IMPORTANT In firefox open: about:config, search for: backdrop -> Turn this   value to true and restart firefox  */ 
+/*Firefox default, is turned off so there is no blur*/
+
+
+@import url("https://fonts.googleapis.com/css2?family=Inconsolata&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+}
+
+
+body {
+    /* background: url("https://images.pexels.com/photos/1655166/pexels-photo-1655166.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260") no-repeat center center; */
+    background-image: url(./zen.jpg);
+    background-size: cover;
+    display: grid;
+    font-family: "Inconsolata", monospace;
+    min-height: 100vh;
+    place-items: center;
+  }
+  
+
+/* 
+  using the holder to place two orbiting balls in.
+ will be using pseudo-elements to create the balls, so the holder will need to be a relative element.   */
+.holder {
+    position: relative;
+  }
+
+  /* To create the balls, the orange one will be created using the before pseudo element and the blue one with the after pseudo element. */
+  /* similar in size and roundness so using double selector. */
+  .holder:before,
+  .holder:after {
+    animation: orbit 5s linear infinite;
+    border-radius: 50%;
+    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
+    content: '';
+    height: 150px;
+    position: absolute;
+    width: 150px;
+  }
+/* 
+created round ball because via 50% border-radius.
+add an animation called orbit (locate . */
+
+.holder:before {
+    background: #ffe897;
+    background: -moz-radial-gradient(top right, #ffe897, #f98a05);
+    background: radial-gradient(to bottom left, #ffe897, #f98a05);
+    background: -webkit-radial-gradient(top right, #ffe897, #f98a05);
+  }
+   /* I used css-gradient.com to generate the gradient. */
+   /* for the blue one, placed a radial gradient and offset it to the right side. */
+    /* !IMPORTANT It needs an animation delay, else they'll be doing the exact same thing. */
+
+  .holder:after {
+    animation-delay: -2.5s;
+    background: #e0e793;
+    background: -moz-radial-gradient(bottom right, #e0e793, #6dd0f1);
+    background: radial-gradient(to top left, #e0e793, #6dd0f1);
+    background: -webkit-radial-gradient(bottom right, #e0e793, #6dd0f1);
+    right: 0;
+    top: 0;
+    z-index: -1;
+  }
+/* add the card */
+/* need fixed size and a small box-shadow so it will pop*/
+  .card {
+    border: 1px solid #fff;
+    border-radius: 15px;
+    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
+    font-size: 2rem;
+    height: 220px;
+    overflow: hidden;
+    position: relative;
+    width: 370px;
+  }
+
+  /* blur effect we use another :before pseudo element. */
+  .card:before {
+    background-color: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px) saturate(100%) contrast(45%) brightness(160%);
+    -webkit-backdrop-filter: blur(10px) saturate(100%) contrast(45%) brightness(130%);
+    content: "";
+    height: 100%;
+    position: absolute;
+    width: 100%;
+  }
+  /* blur effect comes from the backdrop-filter this gives it the blurry look. Background color with an opacity of 30% using rgba */
+
+  /* offset the card text a bit and make sure it's on top of everything. */
+
+  .card__text {
+    color: #6f7886;
+    margin-left: 30px;
+
+    margin-top: 100px;
+    position: relative;
+    z-index: 2;
+  }
+  
+  /* put the visa svg in right bottom corner */
+  .card svg {
+    bottom: 20px;
+    position: absolute;
+    right: 30px;
+  }
+
+
+
+/* make the two balls orbit around the card, in a circular motion. */
+  @keyframes orbit {
+    from {
+      transform: rotate(0deg) translateX(100px) rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg) translateX(100px) rotate(-360deg);
+    }
+  }
+  /* used a two-step animation transforming the elements to rotate from 0 to 360 degrees (a full circle).
+  It also offsets the translateX axis to make it move */
+
+
+
+   /* The below was an attempt to wrap the entire backdrop-filter in @supports to avoid browser read failures. */
+  
+/* @supports ((-webkit-backdrop-filter: blur(10px) saturate(100%) contrast(45%) brightness(130%)) or (backdrop-filter: blur(10px) saturate(100%) contrast(45%) brightness(130%))) {
+    .card{
+      &:before {
+        background-color: rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(10px) saturate(100%) contrast(45%) brightness(130%);
+        content: '';
+        height: 100%;
+        position: absolute;
+        width: 100%;
+      }
+    }
+} */
